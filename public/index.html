@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Panier Malin, des invendus à prix réduit.">
+  <title>Panier Malin</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Panier Malin</a>
+    <button id="logout-button" class="button button-secondary hidden" type="button">Déconnexion</button>
+  </header>
+  <main>
+    <section id="welcome-view" class="panel">
+      <p class="eyebrow">Moins de gaspillage, plus de bonnes affaires</p>
+      <h1>Bienvenue sur Panier Malin</h1>
+      <p>Connectez-vous ou créez votre espace.</p>
+      <div class="actions">
+        <button class="button" type="button" data-view="login">Se connecter</button>
+        <button class="button button-secondary" type="button" data-view="student-register">Créer un compte étudiant</button>
+        <button class="button button-secondary" type="button" data-view="restaurant-register">Inscrire un commerce</button>
+      </div>
+    </section>
+
+    <section id="login-view" class="panel hidden">
+      <h1>Connexion</h1>
+      <form id="login-form">
+        <label for="login-email">Adresse e-mail</label>
+        <input id="login-email" name="email" type="email" autocomplete="email" required>
+        <label for="login-password">Mot de passe</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="button" type="submit">Se connecter</button>
+      </form>
+      <button class="text-button" type="button" data-view="welcome">Retour</button>
+    </section>
+
+    <section id="student-register-view" class="panel hidden">
+      <h1>Créer un compte étudiant</h1>
+      <form id="student-register-form">
+        <label for="student-email">Adresse e-mail</label>
+        <input id="student-email" name="email" type="email" autocomplete="email" required>
+        <label for="student-password">Mot de passe (8 caractères minimum)</label>
+        <input id="student-password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+        <button class="button" type="submit">Créer mon compte</button>
+      </form>
+      <button class="text-button" type="button" data-view="welcome">Retour</button>
+    </section>
+
+    <section id="restaurant-register-view" class="panel hidden">
+      <h1>Inscrire un commerce</h1>
+      <form id="restaurant-register-form">
+        <label for="restaurant-name">Nom du commerce</label>
+        <input id="restaurant-name" name="nom" autocomplete="organization" required>
+        <label for="restaurant-address">Adresse</label>
+        <input id="restaurant-address" name="adresse" autocomplete="street-address" required>
+        <label for="restaurant-phone">Téléphone</label>
+        <input id="restaurant-phone" name="telephone" type="tel" autocomplete="tel" required>
+        <label for="restaurant-email">Adresse e-mail</label>
+        <input id="restaurant-email" name="email" type="email" autocomplete="email" required>
+        <label for="restaurant-password">Mot de passe (8 caractères minimum)</label>
+        <input id="restaurant-password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+        <button class="button" type="submit">Créer l’espace professionnel</button>
+      </form>
+      <button class="text-button" type="button" data-view="welcome">Retour</button>
+    </section>
+
+    <section id="dashboard-view" class="panel hidden">
+      <p class="eyebrow">Votre espace</p>
+      <h1 id="dashboard-title"></h1>
+      <p id="dashboard-email"></p>
+      <button id="catalogue-button" class="button hidden" type="button">Recommandations de paniers</button>
+      <button id="reservations-button" class="button button-secondary hidden" type="button">Mes réservations</button>
+      <button id="restaurant-baskets-button" class="button hidden" type="button">Mes paniers</button>
+      <button id="incoming-reservations-button" class="button button-secondary hidden" type="button">Réservations reçues</button>
+      <button id="notifications-button" class="button button-secondary hidden" type="button">Notifications</button>
+      <div id="commerce-details" class="hidden">
+        <h2>Mon commerce</h2>
+        <p id="commerce-name"></p>
+        <p id="commerce-address"></p>
+        <p id="commerce-phone"></p>
+      </div>
+      <form id="password-form" class="password-form">
+        <h2>Modifier le mot de passe</h2>
+        <label for="current-password">Mot de passe actuel</label>
+        <input id="current-password" name="currentPassword" type="password" autocomplete="current-password" required>
+        <label for="new-password">Nouveau mot de passe (8 caractères minimum)</label>
+        <input id="new-password" name="newPassword" type="password" minlength="8" autocomplete="new-password" required>
+        <button class="button" type="submit">Modifier le mot de passe</button>
+      </form>
+    </section>
+    <section id="catalogue-view" class="panel hidden">
+      <button class="text-button" type="button" data-view="dashboard">Retour à mon espace</button>
+      <h1>Recommandations pour vous</h1>
+      <p>Retrouvez ici les paniers disponibles proposés par les commerces.</p>
+      <form id="search-filters" class="search-filters">
+        <label for="search-keyword">Mot-clé</label>
+        <input id="search-keyword" name="mot_cle" type="search" placeholder="Panier ou commerce">
+        <label for="minimum-price">Prix minimum (MAD)</label>
+        <input id="minimum-price" name="prix_min" type="number" min="0" step="0.01">
+        <label for="maximum-price">Prix maximum (MAD)</label>
+        <input id="maximum-price" name="prix_max" type="number" min="0" step="0.01">
+        <label for="pickup-start">Début de l’horaire souhaité</label>
+        <input id="pickup-start" name="heure_debut" type="time">
+        <label for="pickup-end">Fin de l’horaire souhaité</label>
+        <input id="pickup-end" name="heure_fin" type="time">
+        <div class="filter-actions">
+          <button class="button" type="submit">Filtrer</button>
+          <button id="clear-filters" class="button button-secondary" type="reset">Effacer les filtres</button>
+        </div>
+      </form>
+      <div id="basket-list" class="basket-list"></div>
+      <p id="catalogue-empty" class="hidden"></p>
+    </section>
+    <section id="basket-detail-view" class="panel hidden">
+      <button id="catalogue-back" class="text-button" type="button">Retour aux paniers</button>
+      <div id="basket-detail"></div>
+    </section>
+    <section id="reservations-view" class="panel hidden">
+      <button class="text-button" type="button" data-view="dashboard">Retour à mon espace</button>
+      <h1>Mes réservations</h1>
+      <div id="reservation-list" class="basket-list"></div>
+      <p id="reservations-empty" class="hidden">Vous n’avez pas encore de réservation.</p>
+    </section>
+    <section id="payment-view" class="panel hidden">
+      <button id="payment-back" class="text-button" type="button">Retour à mes réservations</button>
+      <h1>Paiement simulé</h1>
+      <p>Entrez un numéro factice. Un numéro se terminant par 0000 sera refusé.</p>
+      <form id="payment-form">
+        <label for="fake-card-number">Numéro de carte factice</label>
+        <input id="fake-card-number" name="numero_carte" type="text" inputmode="numeric" pattern="[0-9]{4,}" minlength="4" autocomplete="off" required>
+        <button class="button" type="submit">Payer</button>
+      </form>
+    </section>
+    <section id="restaurant-baskets-view" class="panel hidden">
+      <button class="text-button" type="button" data-view="dashboard">Retour à mon espace</button>
+      <h1>Mes paniers</h1>
+      <form id="basket-form">
+        <h2 id="basket-form-title">Créer un panier</h2>
+        <label for="basket-title">Titre</label>
+        <input id="basket-title" name="titre" required>
+        <label for="basket-price">Prix (MAD)</label>
+        <input id="basket-price" name="prix_mad" type="number" min="0" step="0.01" required>
+        <label for="basket-quantity">Quantité</label>
+        <input id="basket-quantity" name="quantite" type="number" min="0" step="1" required>
+        <label for="basket-pickup-start">Début du retrait</label>
+        <input id="basket-pickup-start" name="retrait_debut" type="datetime-local" required>
+        <label for="basket-pickup-end">Fin du retrait</label>
+        <input id="basket-pickup-end" name="retrait_fin" type="datetime-local" required>
+        <div class="filter-actions">
+          <button id="basket-submit" class="button" type="submit">Créer le panier</button>
+          <button id="cancel-basket-edit" class="button button-secondary hidden" type="button">Annuler la modification</button>
+        </div>
+      </form>
+      <div id="restaurant-basket-list" class="basket-list"></div>
+    </section>
+    <section id="incoming-reservations-view" class="panel hidden">
+      <button class="text-button" type="button" data-view="dashboard">Retour à mon espace</button>
+      <h1>Réservations reçues</h1>
+      <div id="incoming-reservation-list" class="basket-list"></div>
+      <p id="incoming-reservations-empty" class="hidden">Aucune réservation reçue pour le moment.</p>
+    </section>
+    <section id="notifications-view" class="panel hidden">
+      <button class="text-button" type="button" data-view="dashboard">Retour à mon espace</button>
+      <h1>Notifications</h1>
+      <div id="notification-list" class="basket-list"></div>
+      <p id="notifications-empty" class="hidden">Aucune notification pour le moment.</p>
+    </section>
+    <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>
